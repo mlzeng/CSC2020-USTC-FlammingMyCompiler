@@ -1,6 +1,24 @@
 # CSC2020-USTC-FlammingMyCompiler
 
-全国大学生计算机系统能力大赛编译系统设计赛项目
+2020年全国大学生计算机系统能力大赛编译系统设计赛项目
+
+## 如何构建与运行本项目
+
+### 构建
+
+进入项目根目录然后执行：
+
+```bash
+mkdir build && cd build && cmake .. && make -j 4
+```
+
+### 运行
+
+### 语言定义
+
+[SysY 语言定义](SysY_def.pdf)
+[SysY 运行时库定义](SysY_lib.pdf)
+[SysY 运行时库](libsysy.a)
 
 ## 编译器的中间代码优化部分的设计
 
