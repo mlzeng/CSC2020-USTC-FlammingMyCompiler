@@ -14,7 +14,7 @@ mkdir build && cd build && cmake .. && make -j 4
 
 ### 运行
 
-使用 build 目录下的 compiler 文件即可将源代码（test.sy）编译到汇编（test.s）：
+使用 build 目录下的可执行文件 compiler 即可将源代码文件（test.sy）编译得到汇编文件（test.s）：
 
 ```bash
 echo "int main() { int a = getint(); putint(a * a); }" > test.sy
@@ -28,7 +28,7 @@ cat test.s
 
 ### 测试
 
-用 GCC 将 test.s 汇编并与 SysY 运行时库 libsysy.a 链接得到可执行文件再运行即可：
+用 GCC 将汇编文件（test.s）汇编并与 SysY 运行时库（libsysy.a）链接得到可执行文件然后运行即可：
 
 #### 在树莓派上测试
 
