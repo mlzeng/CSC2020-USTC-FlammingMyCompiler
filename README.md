@@ -88,7 +88,7 @@
 
 * 共享栈空间：不需要将被并行化的区域拆分出来变成函数
 * 框架更加易于实现：不需要保存上下文和维护各种信息
-* 更便于代码变换：前后就地插个 `tid=mtstart()` 和 `mtend(tid)` 就行了（注：实际变换是在中间代码层次上完成的）
+* 更便于代码变换：前后就地插个 `tid=__mtstart()` 和 `__mtend(tid)` 就行了
 
 ```C
 for (int i = 0; i < n; i++) {
@@ -99,18 +99,24 @@ for (int i = 0; i < n; i++) {
     }
 }
 ```
+
 变换为：
+
 ```C
-int t = mtstart(); 
-for (int i = starti(t) ; i < endi(t) ; i++) {
+int tid = __mtstart(); 
+for (int i = starti(tid) ; i < endi(tid) ; i++) {
     for (int j = 0; j < n; j++) {
         for (int k = 0; k < n; k++) {
             A[i][j] = A[i][j] + B[i][k] * C[k][j];
         }
     }
 }
-mtend(t);
+__mtend(t);
 ```
+
+（注：为了方便调试和测试，编译器支持在 SysY 语言中直接调用 `__mtstart` 和 `__mtend` 函数。）
+
+（注：这里使用源代码来表述是为了便于理解，实际上的自动多线程化的变换是在中间代码层次上由 Multithreading Pass 完成的。）
 
 * 更高的运行性能：栈上的资源仍然可以直接通过栈指针加偏移访问
 
