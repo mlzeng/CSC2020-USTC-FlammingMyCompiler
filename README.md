@@ -16,9 +16,9 @@ mkdir build && cd build && cmake .. && make -j 4
 
 ### 语言定义
 
-[SysY 语言定义](SysY_def.pdf)
-[SysY 运行时库定义](SysY_lib.pdf)
-[SysY 运行时库](libsysy.a)
+* [SysY 语言定义](SysY_def.pdf)
+* [SysY 运行时库定义](SysY_lib.pdf)
+* [SysY 运行时库](libsysy.a?raw=true)
 
 ## 编译器的中间代码优化部分的设计
 
