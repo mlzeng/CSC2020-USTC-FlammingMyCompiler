@@ -54,6 +54,10 @@ qemu-arm -L /usr/arm-linux-gnueabihf/ ./test
 * [SysY 运行时库定义](SysY_lib.pdf)
 * [SysY 运行时库](libsysy.a?raw=true)
 
+### SysY 语言测试用例
+
+可以到大赛官方网站上下载：[SysY 语言测试用例](https://gitlab.eduxiji.net/windcome/sysyruntimelibrary)
+
 ## 编译器的中间代码优化部分的设计
 
 中间代码部分包含三个层次的 IR（每个层次都列出了相关的 Pass）
