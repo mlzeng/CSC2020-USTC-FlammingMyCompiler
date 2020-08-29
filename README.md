@@ -86,4 +86,26 @@
 * 共享栈空间：不需要将被并行化的区域拆分出来变成函数
 * 框架更加易于实现：不需要保存上下文和维护各种信息
 * 更便于代码变换：前后就地插个 `tid=mtstart()` 和 `mtend(tid)` 就行了
+（注：实际变换实在中间代码层次上完成的）
+```C
+for (int i = 0; i < n; i++) {
+    for (int j = 0; j < n; j++) {
+        for (int k = 0; k < n; k++) {
+            A[i][j] = A[i][j] + B[i][k] * C[k][j];
+        }
+    }
+}
+```
+变换为：
+```C
+int t = mtstart(); 
+for (int i = starti(t) ; i < endi(t) ; i++) {
+    for (int j = 0; j < n; j++) {
+        for (int k = 0; k < n; k++) {
+            A[i][j] = A[i][j] + B[i][k] * C[k][j];
+        }
+    }
+}
+mtend(t);
+```
 * 更高的运行性能：栈上的资源可以直接访问而不需要通过函数参数传递
