@@ -14,7 +14,41 @@ mkdir build && cd build && cmake .. && make -j 4
 
 ### 运行
 
-### 语言定义
+使用 build 目录下的 compiler 文件即可将源代码（test.sy）编译到汇编（test.s）：
+
+```bash
+echo "int main() { int a = getint(); putint(a * a); }" > test.sy
+```
+```bash
+./compiler test.sy
+```
+```bash
+cat test.s
+```
+
+### 测试
+
+用 GCC 将 test.s 汇编并与 SysY 运行时库 libsysy.a 链接得到可执行文件再运行即可：
+
+#### 在树莓派上测试
+
+```bash
+gcc test.s libsysy.a -o test
+./test
+```
+
+输入 111 即可看到输出 12321。
+
+#### 在其它平台上交叉编译测试
+
+```bash
+arm-linux-gnueabihf-gcc test.s libsysy.a -o test
+qemu-arm -L /usr/arm-linux-gnueabihf/ ./test
+```
+
+输入 111 即可看到输出 12321。
+
+### SysY 语言定义与运行时库
 
 * [SysY 语言定义](SysY_def.pdf)
 * [SysY 运行时库定义](SysY_lib.pdf)
